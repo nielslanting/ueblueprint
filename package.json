@@ -6,8 +6,9 @@
   "main": "dist/ueblueprint.js",
   "types": "types.js",
   "scripts": {
-    "build": "rollup --config && sass scss/export.scss:dist/css/ueb-style.css && sass scss/export.scss:dist/css/ueb-style.min.css --style=compressed",
-    "start": "npx http-server"
+    "build": "vite build && vite build --mode minified && sass scss/export.scss:dist/css/ueb-style.css && sass scss/export.scss:dist/css/ueb-style.min.css --style=compressed",
+    "start": "vite --host 127.0.0.1",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -26,15 +27,11 @@
   "homepage": "https://github.com/barsdeveloper/ueblueprint#readme",
   "devDependencies": {
     "@playwright/test": "1.49",
-    "@rollup/plugin-node-resolve": "^16",
-    "@rollup/plugin-terser": "^0",
     "concurrently": "^9",
-    "http-server": "^14",
-    "rollup": "^4 || ^3 || ^2",
-    "rollup-plugin-copy": "^3",
-    "rollup-plugin-minify-html-literals": "^1",
     "sass": "^1",
-    "terser": "^5"
+    "terser": "^5",
+    "vite": "^7",
+    "vitest": "^3"
   },
   "dependencies": {
     "lit": "^3",

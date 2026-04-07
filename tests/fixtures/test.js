@@ -1,4 +1,5 @@
-import base from "@playwright/test"
+import { chromium, expect } from "@playwright/test"
+import { beforeAll, beforeEach, describe, test as vitestTest } from "vitest"
 import Configuration from "../../js/Configuration.js"
 import Utility from "../../js/Utility.js"
 import BlueprintFixture from "./BlueprintFixture.js"
@@ -21,32 +22,55 @@ import BlueprintFixture from "./BlueprintFixture.js"
  * }} TestData
  */
 
-export const test = /**
-@type {typeof base.extend<{}, {
-    sharedContext: import("@playwright/test").BrowserContext,
-    blueprintPage: BlueprintFixture,
-}>}
-*/(base.extend)(
+let browser
+let sharedContext
+let blueprintPage
+
+async function getContext() {
+    browser ??= await chromium.launch({ headless: true })
+    sharedContext ??= await browser.newContext()
+
+    if (!blueprintPage) {
+        const page = await sharedContext.newPage()
+        blueprintPage = new BlueprintFixture(page)
+        await blueprintPage.setup()
+    }
+
+    return {
+        browser,
+        sharedContext,
+        page: blueprintPage.page,
+        blueprintPage,
+    }
+}
+
+const wrappedTest = (name, fn, timeout) =>
+    vitestTest(
+        name,
+        async () => fn.length > 0 ? fn(await getContext()) : fn(),
+        timeout
+    )
+
+wrappedTest.only = (name, fn, timeout) =>
+    vitestTest.only(name, async () => fn.length > 0 ? fn(await getContext()) : fn(), timeout)
+wrappedTest.skip = (name, fn, timeout) =>
+    vitestTest.skip(name, fn ? async () => fn.length > 0 ? fn(await getContext()) : fn() : undefined, timeout)
+wrappedTest.beforeAll = (fn, timeout) =>
+    beforeAll(async () => fn.length > 0 ? fn(await getContext()) : fn(), timeout)
+wrappedTest.beforeEach = (fn, timeout) =>
+    beforeEach(async () => fn.length > 0 ? fn(await getContext()) : fn(), timeout)
+wrappedTest.describe = Object.assign(
+    (name, fn) => describe(name, fn),
     {
-        sharedContext: [async ({ browser }, use) => {
-            const context = await browser.newContext()
-            await use(context)
-            await context.close()
-        }, { scope: "worker" }],
-        blueprintPage: [async ({ sharedContext }, use) => {
-            const page = await sharedContext.newPage()
-            const blueprintPage = new BlueprintFixture(page)
-            await blueprintPage.setup()
-            await use(blueprintPage)
-            await blueprintPage.cleanup()
-            await page.close()
-        }, { scope: "worker" }]
+        configure: () => {
+        },
     }
 )
+wrappedTest.setTimeout = () => {
+}
 
-test.setTimeout(10000)
-
-export const expect = base.expect
+export const test = wrappedTest
+export { expect }
 export * from "@playwright/test"
 
 /** @param {TestData} testData */

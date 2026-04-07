@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test"
+import { expect, test } from "./fixtures/test.js"
 import Utility from "../js/Utility.js"
 import AlternativesEntity from "../js/entity/AlternativesEntity.js"
 import ArrayEntity from "../js/entity/ArrayEntity.js"

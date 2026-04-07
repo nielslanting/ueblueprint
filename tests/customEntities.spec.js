@@ -27,9 +27,16 @@ test("Entity2", () => {
 })
 
 test("Entity2-1", () => {
-    Entity2.attributes.someEntity = Entity2.attributes.someEntity.flagInlined()
-    const value = new Entity2()
-    expect(value.serialize()).toEqual(entity2Value1)
+    const someEntity = Entity2.attributes.someEntity
+    const inlined = someEntity.inlined
+    try {
+        Entity2.attributes.someEntity = Entity2.attributes.someEntity.flagInlined()
+        const value = new Entity2()
+        expect(value.serialize()).toEqual(entity2Value1)
+    } finally {
+        someEntity.inlined = inlined
+        Entity2.attributes.someEntity = someEntity
+    }
 })
 
 test("Entity3", () => {
@@ -60,10 +67,21 @@ test("Entity3", () => {
 })
 
 test("Entity4", () => {
-    Entity1.attributeSeparator = " - "
-    Entity1.keySeparator = ":"
-    Entity1.printKey = k => k.toUpperCase()
-    Entity1.wrap = (entity, v) => `E1[${v}]`
-    const entity = new Entity4()
-    expect(entity.serialize()).toEqual(entity4Value)
+    const attributeSeparator = Entity1.attributeSeparator
+    const keySeparator = Entity1.keySeparator
+    const printKey = Entity1.printKey
+    const wrap = Entity1.wrap
+    try {
+        Entity1.attributeSeparator = " - "
+        Entity1.keySeparator = ":"
+        Entity1.printKey = k => k.toUpperCase()
+        Entity1.wrap = (entity, v) => `E1[${v}]`
+        const entity = new Entity4()
+        expect(entity.serialize()).toEqual(entity4Value)
+    } finally {
+        Entity1.attributeSeparator = attributeSeparator
+        Entity1.keySeparator = keySeparator
+        Entity1.printKey = printKey
+        Entity1.wrap = wrap
+    }
 })

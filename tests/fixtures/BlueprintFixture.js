@@ -1,5 +1,4 @@
-import http from "http"
-import httpServer from "http-server"
+import { startStaticServer } from "./staticServer.js"
 
 
 export default class BlueprintFixture {
@@ -19,7 +18,7 @@ export default class BlueprintFixture {
         return this.#node
     }
 
-    /** @type {ReturnType<httpServer.createServer>} */
+    /** @type {http.Server} */
     static server
 
     /** @param {import("playwright/test").Page} page */
@@ -61,52 +60,10 @@ export default class BlueprintFixture {
         }
     }
 
-    async checkServerReady(url) {
-        return new Promise((resolve, reject) => {
-            const request = http.get(url, res => {
-                if (res.statusCode === 200) {
-                    resolve()
-                } else {
-                    reject(new Error(`Server not ready, status code: ${res.statusCode}`))
-                }
-            })
-
-            request.on("error", error => reject(error))
-            request.end()
-        })
-    }
-
     createServer() {
-        return new Promise((resolve, reject) => {
-            const webserver = httpServer.createServer({
-                root: "./",
-                cors: true,
-                logFn: (req, res, error) => error && console.error(`Http server: ${error}`)
-            })
-            webserver.server.addListener("error", error => {
-                if (error.code === "EADDRINUSE") {
-                    console.log(`Port ${this.#port} is already in use, assuming server is already running`)
-                    resolve(webserver)
-                } else {
-                    resolve(null)
-                }
-            })
-            webserver.listen(this.#port, "127.0.0.1", async () => {
-                console.log(`Server started on http://127.0.0.1:${this.#port}`)
-                const url = `http://127.0.0.1:${this.#port}/debug.html`
-                try {
-                    await this.checkServerReady(url)
-                    BlueprintFixture.server = webserver
-                    resolve(webserver)
-                } catch (error) {
-                    console.error("Server failed readiness check:", error)
-                    reject(error)
-                }
-            })
-            process.addListener("SIGTERM", () => {
-                console.log("SIGTERM signal received: closing HTTP server")
-                webserver.close()
-            })
+        return startStaticServer({ port: this.#port }).then(server => {
+            BlueprintFixture.server = server
+            return server
         })
     }
 
