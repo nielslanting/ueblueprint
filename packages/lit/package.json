@@ -4,14 +4,15 @@
   "type": "module",
   "main": "dist/ueblueprint.js",
   "exports": {
-    ".": "./src/export.js",
+    ".": "./dist/ueblueprint.js",
+    "./*.js": "./src/*.ts",
     "./*": "./src/*"
   },
   "scripts": {
     "build": "vite build && vite build --mode minified && sass scss/export.scss:dist/css/ueb-style.css && sass scss/export.scss:dist/css/ueb-style.min.css --style=compressed",
     "dev": "vite --host 127.0.0.1",
     "start": "vite --host 127.0.0.1",
-    "test": "npm run build && vitest run -c vitest.config.js"
+    "test": "npm run build && vitest run -c vitest.config.ts"
   },
   "dependencies": {
     "@ueblueprint/parser": "2.0.0",

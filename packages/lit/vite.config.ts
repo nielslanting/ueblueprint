@@ -18,7 +18,7 @@ function copyFonts() {
 
 const baseBuild = {
     lib: {
-        entry: "src/export.js",
+        entry: "src/export.ts",
         formats: ["es"],
     },
     rollupOptions: {

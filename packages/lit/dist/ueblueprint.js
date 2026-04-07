@@ -5805,8 +5805,8 @@ class KeyBindingEntity extends IEntity {
 class KeyboardShortcut extends IInput {
   static #ignoreEvent = (
     /** @param {KeyboardShortcut} self */
-    (self) => {
-    }
+    ((self) => {
+    })
   );
   /** @type {KeyBindingEntity[]} */
   #activationKeys;
@@ -5938,8 +5938,8 @@ class IPointing extends IInput {
 class MouseClick extends IPointing {
   static #ignoreEvent = (
     /** @param {MouseClick} self */
-    (self) => {
-    }
+    ((self) => {
+    })
   );
   /** @param {MouseEvent} e */
   #mouseDownHandler = (e2) => {
@@ -9348,77 +9348,6 @@ class Paste extends IInput {
     return nodes;
   }
 }
-class MouseWheel extends IPointing {
-  /** @param {MouseWheel} self */
-  static #ignoreEvent = (self) => {
-  };
-  #variation = 0;
-  get variation() {
-    return this.#variation;
-  }
-  /** @param {WheelEvent} e */
-  #mouseWheelHandler = (e2) => {
-    if (this.enablerKey && !this.enablerActivated) {
-      return;
-    }
-    e2.preventDefault();
-    this.#variation = e2.deltaY;
-    this.setLocationFromEvent(e2);
-    this.wheel();
-  };
-  /** @param {WheelEvent} e */
-  #mouseParentWheelHandler = (e2) => e2.preventDefault();
-  /**
-   * @param {HTMLElement} target
-   * @param {Blueprint} blueprint
-   * @param {Options} options
-   */
-  constructor(target, blueprint, options = {}, onWheel = MouseWheel.#ignoreEvent) {
-    options.listenOnFocus = true;
-    options.strictTarget ??= false;
-    super(target, blueprint, options);
-    this.strictTarget = options.strictTarget;
-    this.onWheel = onWheel;
-  }
-  listenEvents() {
-    this.movementSpace.addEventListener("wheel", this.#mouseWheelHandler, false);
-    this.movementSpace.parentElement?.addEventListener("wheel", this.#mouseParentWheelHandler);
-  }
-  unlistenEvents() {
-    this.movementSpace.removeEventListener("wheel", this.#mouseWheelHandler, false);
-    this.movementSpace.parentElement?.removeEventListener("wheel", this.#mouseParentWheelHandler);
-  }
-  /* Subclasses can override */
-  wheel() {
-    this.onWheel(this);
-  }
-}
-class Zoom extends MouseWheel {
-  #accumulatedVariation = 0;
-  #enableZoonIn = false;
-  get enableZoonIn() {
-    return this.#enableZoonIn;
-  }
-  set enableZoonIn(value) {
-    if (value == this.#enableZoonIn) {
-      return;
-    }
-    this.#enableZoonIn = value;
-  }
-  wheel() {
-    this.#accumulatedVariation += -this.variation;
-    if (Math.abs(this.#accumulatedVariation) < Configuration.mouseWheelZoomThreshold) {
-      return;
-    }
-    let zoomLevel = this.blueprint.getZoom();
-    if (!this.enableZoonIn && zoomLevel == 0 && this.#accumulatedVariation > 0) {
-      return;
-    }
-    zoomLevel += Math.sign(this.#accumulatedVariation);
-    this.blueprint.setZoom(zoomLevel, this.location);
-    this.#accumulatedVariation = 0;
-  }
-}
 class KeyboardEnableZoom extends KeyboardShortcut {
   /** @type {Zoom} */
   #zoomInputObject;
@@ -9577,6 +9506,77 @@ class Unfocus extends IInput {
   }
   unlistenEvents() {
     document.removeEventListener("click", this.#clickHandler);
+  }
+}
+class MouseWheel extends IPointing {
+  /** @param {MouseWheel} self */
+  static #ignoreEvent = (self) => {
+  };
+  #variation = 0;
+  get variation() {
+    return this.#variation;
+  }
+  /** @param {WheelEvent} e */
+  #mouseWheelHandler = (e2) => {
+    if (this.enablerKey && !this.enablerActivated) {
+      return;
+    }
+    e2.preventDefault();
+    this.#variation = e2.deltaY;
+    this.setLocationFromEvent(e2);
+    this.wheel();
+  };
+  /** @param {WheelEvent} e */
+  #mouseParentWheelHandler = (e2) => e2.preventDefault();
+  /**
+   * @param {HTMLElement} target
+   * @param {Blueprint} blueprint
+   * @param {Options} options
+   */
+  constructor(target, blueprint, options = {}, onWheel = MouseWheel.#ignoreEvent) {
+    options.listenOnFocus = true;
+    options.strictTarget ??= false;
+    super(target, blueprint, options);
+    this.strictTarget = options.strictTarget;
+    this.onWheel = onWheel;
+  }
+  listenEvents() {
+    this.movementSpace.addEventListener("wheel", this.#mouseWheelHandler, false);
+    this.movementSpace.parentElement?.addEventListener("wheel", this.#mouseParentWheelHandler);
+  }
+  unlistenEvents() {
+    this.movementSpace.removeEventListener("wheel", this.#mouseWheelHandler, false);
+    this.movementSpace.parentElement?.removeEventListener("wheel", this.#mouseParentWheelHandler);
+  }
+  /* Subclasses can override */
+  wheel() {
+    this.onWheel(this);
+  }
+}
+class Zoom extends MouseWheel {
+  #accumulatedVariation = 0;
+  #enableZoonIn = false;
+  get enableZoonIn() {
+    return this.#enableZoonIn;
+  }
+  set enableZoonIn(value) {
+    if (value == this.#enableZoonIn) {
+      return;
+    }
+    this.#enableZoonIn = value;
+  }
+  wheel() {
+    this.#accumulatedVariation += -this.variation;
+    if (Math.abs(this.#accumulatedVariation) < Configuration.mouseWheelZoomThreshold) {
+      return;
+    }
+    let zoomLevel = this.blueprint.getZoom();
+    if (!this.enableZoonIn && zoomLevel == 0 && this.#accumulatedVariation > 0) {
+      return;
+    }
+    zoomLevel += Math.sign(this.#accumulatedVariation);
+    this.blueprint.setZoom(zoomLevel, this.location);
+    this.#accumulatedVariation = 0;
   }
 }
 class BlueprintTemplate extends ITemplate {
@@ -9983,9 +9983,9 @@ class Blueprint extends IElement {
         0,
         x2,
         scrollTime,
-        (x3) => {
-          this.scrollDelta(x3 - previousScrollDelta[0], 0, false);
-          previousScrollDelta[0] = x3;
+        (x22) => {
+          this.scrollDelta(x22 - previousScrollDelta[0], 0, false);
+          previousScrollDelta[0] = x22;
         },
         (id) => this.#xScrollingAnimationId = id
       );
@@ -9993,9 +9993,9 @@ class Blueprint extends IElement {
         0,
         y3,
         scrollTime,
-        (y4) => {
-          this.scrollDelta(0, y4 - previousScrollDelta[1], false);
-          previousScrollDelta[1] = y4;
+        (y22) => {
+          this.scrollDelta(0, y22 - previousScrollDelta[1], false);
+          previousScrollDelta[1] = y22;
         },
         (id) => this.#yScrollingAnimationId = id
       );
@@ -11005,7 +11005,7 @@ class ColorPickerWindowTemplate extends WindowTemplate {
   #vSlider;
   #hexRGBHandler = (
     /** @param {UIEvent} v */
-    (v2) => {
+    ((v2) => {
       const input = Utility.clearHTMLWhitespace(
         /** @type {HTMLElement} */
         v2.target.innerHTML
@@ -11016,11 +11016,11 @@ class ColorPickerWindowTemplate extends WindowTemplate {
       }
       this.color.setFromRGBANumber(RGBAValue);
       this.element.requestUpdate();
-    }
+    })
   );
   #hexSRGBHandler = (
     /** @param {UIEvent} v */
-    (v2) => {
+    ((v2) => {
       const input = Utility.clearHTMLWhitespace(
         /** @type {HTMLElement} */
         v2.target.innerHTML
@@ -11031,19 +11031,19 @@ class ColorPickerWindowTemplate extends WindowTemplate {
       }
       this.color.setFromSRGBANumber(sRGBAValue);
       this.element.requestUpdate();
-    }
+    })
   );
   #doOnEnter = (
     /** @param {(e: UIEvent) => void} action */
-    (action) => (
+    ((action) => (
       /** @param {KeyboardEvent} e */
-      (e2) => {
+      ((e2) => {
         if (e2.code == "Enter") {
           e2.preventDefault();
           action(e2);
         }
-      }
-    )
+      })
+    ))
   );
   #color = new LinearColorEntity();
   get color() {
@@ -11096,9 +11096,9 @@ class ColorPickerWindowTemplate extends WindowTemplate {
     this.#sSlider = this.element.querySelector(".ueb-color-picker-s ueb-ui-slider");
     this.#vSlider = this.element.querySelector(".ueb-color-picker-v ueb-ui-slider");
     this.#wheelHandler.template.locationChangeCallback = /**
-     * @param {Number} x in the range [0, 1]
-     * @param {Number} y in the range [0, 1]
-     */
+    * @param {Number} x in the range [0, 1]
+    * @param {Number} y in the range [0, 1]
+    */
     (x2, y3) => {
       this.color.setFromWheelLocation(x2, y3, this.color.V.value, this.color.A.value);
       this.fullColor.setFromHSVA(this.color.H.value, 1, 1, 1);

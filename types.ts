@@ -2,6 +2,7 @@
  * @template {typeof import("./packages/parser/src/entity/IEntity.js").default} T
  * @typedef {import("./packages/parser/src/entity/MirroredEntity.js").default<T>} MirroredEntity
  */
+
 /**
  * @typedef {[Number, Number]} Coordinates
  */
