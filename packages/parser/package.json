@@ -1,0 +1,21 @@
+{
+  "name": "@ueblueprint/parser",
+  "version": "2.0.0",
+  "type": "module",
+  "main": "src/export.js",
+  "exports": {
+    ".": "./src/export.js",
+    "./*": "./src/*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run -c vitest.config.js"
+  },
+  "dependencies": {
+    "parsernostrum": "^1"
+  },
+  "devDependencies": {
+    "vite": "^7",
+    "vitest": "^3"
+  }
+}

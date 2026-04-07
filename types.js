@@ -1,6 +1,6 @@
 /**
- * @template {typeof import("./js/entity/IEntity.js").default} T
- * @typedef {import("./js/entity/MirroredEntity.js").default<T>} MirroredEntity
+ * @template {typeof import("./packages/parser/src/entity/IEntity.js").default} T
+ * @typedef {import("./packages/parser/src/entity/MirroredEntity.js").default<T>} MirroredEntity
  */
 /**
  * @typedef {[Number, Number]} Coordinates
@@ -9,7 +9,7 @@
  * @typedef {CustomEvent<{ value: Coordinates }>} UEBDragEvent
  * @typedef {CustomEvent} UEBNodeUpdateEvent
  */
-/** @typedef {typeof import("./js/entity/IEntity.js").default} IEntityConstructor */
+/** @typedef {typeof import("./packages/parser/src/entity/IEntity.js").default} IEntityConstructor */
 /**
  * @template T
  * @typedef {T extends [infer A] ? InstanceType<A>
@@ -19,131 +19,131 @@
  */
 /**
  * @template T
- * @typedef {T extends import("./js/entity/AlternativesEntity.js").default<infer R extends any[]> ? Boolean
- *     : T extends import("./js/entity/ArrayEntity.js").default<infer R extends IEntityConstructor> ? ExtractType<R>
+ * @typedef {T extends import("./packages/parser/src/entity/AlternativesEntity.js").default<infer R extends any[]> ? Boolean
+ *     : T extends import("./packages/parser/src/entity/ArrayEntity.js").default<infer R extends IEntityConstructor> ? ExtractType<R>
  *     : InstanceType<T>
  * } ExtractType
  */
 /**
- * @typedef {typeof import("./js/Blueprint.js").default} BlueprintConstructor
- * @typedef {typeof import("./js/element/IElement.js").default} IElementConstructor
- * @typedef {typeof import("./js/element/LinkElement.js").default} LinkElementConstructor
- * @typedef {typeof import("./js/element/NodeElement.js").default} NodeElementConstructor
- * @typedef {typeof import("./js/element/PinElement.js").default} PinElementConstructor
- * @typedef {typeof import("./js/element/WindowElement.js").default} WindowElementConstructor
- * @typedef {typeof import("./js/entity/AlternativesEntity.js").default} AlternativesEntityConstructor
- * @typedef {typeof import("./js/entity/IEntity.js").default} EntityConstructor
- * @typedef {typeof import("./js/entity/ObjectEntity.js").default} ObjectEntityConstructor
+ * @typedef {typeof import("./packages/lit/src/Blueprint.js").default} BlueprintConstructor
+ * @typedef {typeof import("./packages/lit/src/element/IElement.js").default} IElementConstructor
+ * @typedef {typeof import("./packages/lit/src/element/LinkElement.js").default} LinkElementConstructor
+ * @typedef {typeof import("./packages/lit/src/element/NodeElement.js").default} NodeElementConstructor
+ * @typedef {typeof import("./packages/lit/src/element/PinElement.js").default} PinElementConstructor
+ * @typedef {typeof import("./packages/lit/src/element/WindowElement.js").default} WindowElementConstructor
+ * @typedef {typeof import("./packages/parser/src/entity/AlternativesEntity.js").default} AlternativesEntityConstructor
+ * @typedef {typeof import("./packages/parser/src/entity/IEntity.js").default} EntityConstructor
+ * @typedef {typeof import("./packages/parser/src/entity/ObjectEntity.js").default} ObjectEntityConstructor
  */
 /**
  * @template {IEntity} T
- * @typedef {import("./js/entity/PinEntity.js").default<T>} PinEntity<T>
+ * @typedef {import("./packages/parser/src/entity/PinEntity.js").default<T>} PinEntity<T>
  */
 /**
- * @typedef {import ("./tests/fixtures/BlueprintFixture.js").default} BlueprintFixture
- * @typedef {import("./js/Blueprint.js").default} Blueprint
- * @typedef {import("./js/element/ColorHandlerElement.js").default} ColorHandlerElement
- * @typedef {import("./js/element/ColorSliderElement.js").default} ColorSliderElement
- * @typedef {import("./js/element/DropdownElement.js").default} DropdownElement
- * @typedef {import("./js/element/ElementFactory.js").default} ElementFactory
- * @typedef {import("./js/element/IDraggableControlElement.js").default} IDraggableControlElement
- * @typedef {import("./js/element/IDraggableElement.js").default} IDraggableElement
- * @typedef {import("./js/element/IElement.js").default} IElement
- * @typedef {import("./js/element/IFromToPositionedElement.js").default} IFromToPositionedElement
- * @typedef {import("./js/element/InputElement.js").default} InputElement
- * @typedef {import("./js/element/ISelectableDraggableElement.js").default} ISelectableDraggableElement
- * @typedef {import("./js/element/LinkElement.js").default} LinkElement
- * @typedef {import("./js/element/NodeElement.js").default} NodeElement
- * @typedef {import("./js/element/PinElement.js").default} PinElement
- * @typedef {import("./js/element/SelectorElement.js").default} SelectorElement
- * @typedef {import("./js/element/WindowElement.js").default} WindowElement
- * @typedef {import("./js/entity/ByteEntity.js").default} ByteEntity
- * @typedef {import("./js/entity/BlueprintEntity.js").default} BlueprintEntity
- * @typedef {import("./js/entity/ColorChannelEntity.js").default} ColorChannelEntity
- * @typedef {import("./js/entity/ComputedTypeEntity.js").default} ComputedTypeEntity
- * @typedef {import("./js/entity/EnumDisplayValueEntity.js").default} EnumDisplayValueEntity
- * @typedef {import("./js/entity/EnumEntity.js").default} EnumEntity
- * @typedef {import("./js/entity/FormatTextEntity.js").default} FormatTextEntity
- * @typedef {import("./js/entity/FunctionReferenceEntity.js").default} FunctionReferenceEntity
- * @typedef {import("./js/entity/GuidEntity.js").default} GuidEntity
- * @typedef {import("./js/entity/IEntity.js").default} IEntity
- * @typedef {import("./js/entity/Integer64Entity.js").default} Integer64Entity
- * @typedef {import("./js/entity/IntegerEntity.js").default} IntegerEntity
- * @typedef {import("./js/entity/InvariantTextEntity.js").default} InvariantTextEntity
- * @typedef {import("./js/entity/KeyBindingEntity.js").default} KeyBindingEntity
- * @typedef {import("./js/entity/LinearColorEntity.js").default} LinearColorEntity
- * @typedef {import("./js/entity/LocalizedTextEntity.js").default} LocalizedTextEntity
- * @typedef {import("./js/entity/MacroGraphReferenceEntity.js").default} MacroGraphReferenceEntity
- * @typedef {import("./js/entity/NaturalNumberEntity.js").default} NaturalNumberEntity
- * @typedef {import("./js/entity/NullEntity.js").default} NullEntity
- * @typedef {import("./js/entity/NumberEntity.js").default} NumberEntity
- * @typedef {import("./js/entity/ObjectEntity.js").default} ObjectEntity
- * @typedef {import("./js/entity/ObjectReferenceEntity.js").default} ObjectReferenceEntity
- * @typedef {import("./js/entity/objects/KnotEntity.js").default} KnotEntity
- * @typedef {import("./js/entity/PinReferenceEntity.js").default} PinReferenceEntity
- * @typedef {import("./js/entity/PinTypeEntity.js").default} PinTypeEntity
- * @typedef {import("./js/entity/RBSerializationVector2DEntity.js").default} RBSerializationVector2DEntity
- * @typedef {import("./js/entity/RotatorEntity.js").default} RotatorEntity
- * @typedef {import("./js/entity/SimpleSerializationRotatorEntity.js").default} SimpleSerializationRotatorEntity
- * @typedef {import("./js/entity/SimpleSerializationVector2DEntity.js").default} SimpleSerializationVector2DEntity
- * @typedef {import("./js/entity/SimpleSerializationVectorEntity.js").default} SimpleSerializationVectorEntity
- * @typedef {import("./js/entity/StringEntity.js").default} StringEntity
- * @typedef {import("./js/entity/SymbolEntity.js").default} SymbolEntity
- * @typedef {import("./js/entity/TerminalTypeEntity.js").default} TerminalTypeEntity
- * @typedef {import("./js/entity/UnknownKeysEntity.js").default} UnknownKeysEntity
- * @typedef {import("./js/entity/UnknownPinEntity.js").default} UnknownPinEntity
- * @typedef {import("./js/entity/VariableReferenceEntity.js").default} VariableReferenceEntity
- * @typedef {import("./js/entity/Vector2DEntity.js").default} Vector2DEntity
- * @typedef {import("./js/entity/Vector4DEntity.js").default} Vector4DEntity
- * @typedef {import("./js/entity/VectorEntity.js").default} VectorEntity
- * @typedef {import("./js/input/IInput.js").default} IInput
- * @typedef {import("./js/input/keyboard/KeyboardShortcut.js").default} KeyboardShortcut
- * @typedef {import("./js/input/mouse/MouseMoveDraggable.js").default} MouseMoveDraggable
- * @typedef {import("./js/template/BlueprintTemplate.js").default} BlueprintTemplate
- * @typedef {import("./js/template/ColorHandlerTemplate.js").default} ColorHandlerTemplate
- * @typedef {import("./js/template/ColorSliderTemplate.js").default} ColorSliderTemplate
- * @typedef {import("./js/template/IDraggableControlTemplate.js").default} IDraggableControlTemplate
- * @typedef {import("./js/template/IDraggablePositionedTemplate.js").default} IDraggablePositionedTemplate
- * @typedef {import("./js/template/IDraggableTemplate.js").default} IDraggableTemplate
- * @typedef {import("./js/template/IFromToPositionedTemplate.js").default} IFromToPositionedTemplate
- * @typedef {import("./js/template/IResizeableTemplate.js").default} IResizeableTemplate
- * @typedef {import("./js/template/ISelectableDraggableTemplate.js").default} ISelectableDraggableTemplate
- * @typedef {import("./js/template/ITemplate.js").default} ITemplate
- * @typedef {import("./js/template/LinkTemplate.js").default} LinkTemplate
- * @typedef {import("./js/template/node/CommentNodeTemplate.js").default} CommentNodeTemplate
- * @typedef {import("./js/template/node/EventNodeTemplate.js").default} EventNodeTemplate
- * @typedef {import("./js/template/node/KnotNodeTemplate.js").default} KnotNodeTemplate
- * @typedef {import("./js/template/node/NodeTemplate.js").default} NodeTemplate
- * @typedef {import("./js/template/node/VariableAccessNodeTemplate.js").default} VariableAccessNodeTemplate
- * @typedef {import("./js/template/node/VariableConversionNodeTemplate.js").default} VariableConversionNodeTemplate
- * @typedef {import("./js/template/node/VariableMangementNodeTemplate.js").default} VariableMangementNodeTemplate
- * @typedef {import("./js/template/node/VariableOperationNodeTemplate.js").default} VariableOperationNodeTemplate
- * @typedef {import("./js/template/pin/BoolPinTemplate.js").default} BoolPinTemplate
- * @typedef {import("./js/template/pin/DropdownTemplate.js").default} DropdownTemplate
- * @typedef {import("./js/template/pin/EnumPinTemplate.js").default} EnumPinTemplate
- * @typedef {import("./js/template/pin/ExecPinTemplate.js").default} ExecPinTemplate
- * @typedef {import("./js/template/pin/IInputPinTemplate.js").default} IInputPinTemplate
- * @typedef {import("./js/template/pin/InputTemplate.js").default} InputTemplate
- * @typedef {import("./js/template/pin/Int64PinTemplate.js").default} Int64PinTemplate
- * @typedef {import("./js/template/pin/IntPinTemplate.js").default} IntPinTemplate
- * @typedef {import("./js/template/pin/INumericPinTemplate.js").default} INumericPinTemplate
- * @typedef {import("./js/template/pin/KnotPinTemplate.js").default} KnotPinTemplate
- * @typedef {import("./js/template/pin/LinearColorPinTemplate.js").default} LinearColorPinTemplate
- * @typedef {import("./js/template/pin/MinimalPinTemplate.js").default} MinimalPinTemplate
- * @typedef {import("./js/template/pin/NamePinTemplate.js").default} NamePinTemplate
- * @typedef {import("./js/template/pin/RealPinTemplate.js").default} RealPinTemplate
- * @typedef {import("./js/template/pin/ReferencePinTemplate.js").default} ReferencePinTemplate
- * @typedef {import("./js/template/pin/RotatorPinTemplate.js").default} RotatorPinTemplate
- * @typedef {import("./js/template/pin/StringPinTemplate.js").default} StringPinTemplate
- * @typedef {import("./js/template/pin/Vector2DPinTemplate.js").default} Vector2DPinTemplate
- * @typedef {import("./js/template/pin/VectorPinTemplate.js").default} VectorPinTemplate
- * @typedef {import("./js/template/SelectorTemplate.js").default} SelectorTemplate
- * @typedef {import("./js/template/window/ColorPickerWindowTemplate.js").default} ColorPickerWindowTemplate
- * @typedef {import("./js/template/window/WindowTemplate.js").default} WindowTemplate
+ * @typedef {import ("./packages/lit/tests/fixtures/BlueprintFixture.js").default} BlueprintFixture
+ * @typedef {import("./packages/lit/src/Blueprint.js").default} Blueprint
+ * @typedef {import("./packages/lit/src/element/ColorHandlerElement.js").default} ColorHandlerElement
+ * @typedef {import("./packages/lit/src/element/ColorSliderElement.js").default} ColorSliderElement
+ * @typedef {import("./packages/lit/src/element/DropdownElement.js").default} DropdownElement
+ * @typedef {import("./packages/lit/src/element/ElementFactory.js").default} ElementFactory
+ * @typedef {import("./packages/lit/src/element/IDraggableControlElement.js").default} IDraggableControlElement
+ * @typedef {import("./packages/lit/src/element/IDraggableElement.js").default} IDraggableElement
+ * @typedef {import("./packages/lit/src/element/IElement.js").default} IElement
+ * @typedef {import("./packages/lit/src/element/IFromToPositionedElement.js").default} IFromToPositionedElement
+ * @typedef {import("./packages/lit/src/element/InputElement.js").default} InputElement
+ * @typedef {import("./packages/lit/src/element/ISelectableDraggableElement.js").default} ISelectableDraggableElement
+ * @typedef {import("./packages/lit/src/element/LinkElement.js").default} LinkElement
+ * @typedef {import("./packages/lit/src/element/NodeElement.js").default} NodeElement
+ * @typedef {import("./packages/lit/src/element/PinElement.js").default} PinElement
+ * @typedef {import("./packages/lit/src/element/SelectorElement.js").default} SelectorElement
+ * @typedef {import("./packages/lit/src/element/WindowElement.js").default} WindowElement
+ * @typedef {import("./packages/parser/src/entity/ByteEntity.js").default} ByteEntity
+ * @typedef {import("./packages/parser/src/entity/BlueprintEntity.js").default} BlueprintEntity
+ * @typedef {import("./packages/parser/src/entity/ColorChannelEntity.js").default} ColorChannelEntity
+ * @typedef {import("./packages/parser/src/entity/ComputedTypeEntity.js").default} ComputedTypeEntity
+ * @typedef {import("./packages/parser/src/entity/EnumDisplayValueEntity.js").default} EnumDisplayValueEntity
+ * @typedef {import("./packages/parser/src/entity/EnumEntity.js").default} EnumEntity
+ * @typedef {import("./packages/parser/src/entity/FormatTextEntity.js").default} FormatTextEntity
+ * @typedef {import("./packages/parser/src/entity/FunctionReferenceEntity.js").default} FunctionReferenceEntity
+ * @typedef {import("./packages/parser/src/entity/GuidEntity.js").default} GuidEntity
+ * @typedef {import("./packages/parser/src/entity/IEntity.js").default} IEntity
+ * @typedef {import("./packages/parser/src/entity/Integer64Entity.js").default} Integer64Entity
+ * @typedef {import("./packages/parser/src/entity/IntegerEntity.js").default} IntegerEntity
+ * @typedef {import("./packages/parser/src/entity/InvariantTextEntity.js").default} InvariantTextEntity
+ * @typedef {import("./packages/parser/src/entity/KeyBindingEntity.js").default} KeyBindingEntity
+ * @typedef {import("./packages/parser/src/entity/LinearColorEntity.js").default} LinearColorEntity
+ * @typedef {import("./packages/parser/src/entity/LocalizedTextEntity.js").default} LocalizedTextEntity
+ * @typedef {import("./packages/parser/src/entity/MacroGraphReferenceEntity.js").default} MacroGraphReferenceEntity
+ * @typedef {import("./packages/parser/src/entity/NaturalNumberEntity.js").default} NaturalNumberEntity
+ * @typedef {import("./packages/parser/src/entity/NullEntity.js").default} NullEntity
+ * @typedef {import("./packages/parser/src/entity/NumberEntity.js").default} NumberEntity
+ * @typedef {import("./packages/parser/src/entity/ObjectEntity.js").default} ObjectEntity
+ * @typedef {import("./packages/parser/src/entity/ObjectReferenceEntity.js").default} ObjectReferenceEntity
+ * @typedef {import("./packages/parser/src/entity/objects/KnotEntity.js").default} KnotEntity
+ * @typedef {import("./packages/parser/src/entity/PinReferenceEntity.js").default} PinReferenceEntity
+ * @typedef {import("./packages/parser/src/entity/PinTypeEntity.js").default} PinTypeEntity
+ * @typedef {import("./packages/parser/src/entity/RBSerializationVector2DEntity.js").default} RBSerializationVector2DEntity
+ * @typedef {import("./packages/parser/src/entity/RotatorEntity.js").default} RotatorEntity
+ * @typedef {import("./packages/parser/src/entity/SimpleSerializationRotatorEntity.js").default} SimpleSerializationRotatorEntity
+ * @typedef {import("./packages/parser/src/entity/SimpleSerializationVector2DEntity.js").default} SimpleSerializationVector2DEntity
+ * @typedef {import("./packages/parser/src/entity/SimpleSerializationVectorEntity.js").default} SimpleSerializationVectorEntity
+ * @typedef {import("./packages/parser/src/entity/StringEntity.js").default} StringEntity
+ * @typedef {import("./packages/parser/src/entity/SymbolEntity.js").default} SymbolEntity
+ * @typedef {import("./packages/parser/src/entity/TerminalTypeEntity.js").default} TerminalTypeEntity
+ * @typedef {import("./packages/parser/src/entity/UnknownKeysEntity.js").default} UnknownKeysEntity
+ * @typedef {import("./packages/parser/src/entity/UnknownPinEntity.js").default} UnknownPinEntity
+ * @typedef {import("./packages/parser/src/entity/VariableReferenceEntity.js").default} VariableReferenceEntity
+ * @typedef {import("./packages/parser/src/entity/Vector2DEntity.js").default} Vector2DEntity
+ * @typedef {import("./packages/parser/src/entity/Vector4DEntity.js").default} Vector4DEntity
+ * @typedef {import("./packages/parser/src/entity/VectorEntity.js").default} VectorEntity
+ * @typedef {import("./packages/lit/src/input/IInput.js").default} IInput
+ * @typedef {import("./packages/lit/src/input/keyboard/KeyboardShortcut.js").default} KeyboardShortcut
+ * @typedef {import("./packages/lit/src/input/mouse/MouseMoveDraggable.js").default} MouseMoveDraggable
+ * @typedef {import("./packages/lit/src/template/BlueprintTemplate.js").default} BlueprintTemplate
+ * @typedef {import("./packages/lit/src/template/ColorHandlerTemplate.js").default} ColorHandlerTemplate
+ * @typedef {import("./packages/lit/src/template/ColorSliderTemplate.js").default} ColorSliderTemplate
+ * @typedef {import("./packages/lit/src/template/IDraggableControlTemplate.js").default} IDraggableControlTemplate
+ * @typedef {import("./packages/lit/src/template/IDraggablePositionedTemplate.js").default} IDraggablePositionedTemplate
+ * @typedef {import("./packages/lit/src/template/IDraggableTemplate.js").default} IDraggableTemplate
+ * @typedef {import("./packages/lit/src/template/IFromToPositionedTemplate.js").default} IFromToPositionedTemplate
+ * @typedef {import("./packages/lit/src/template/IResizeableTemplate.js").default} IResizeableTemplate
+ * @typedef {import("./packages/lit/src/template/ISelectableDraggableTemplate.js").default} ISelectableDraggableTemplate
+ * @typedef {import("./packages/lit/src/template/ITemplate.js").default} ITemplate
+ * @typedef {import("./packages/lit/src/template/LinkTemplate.js").default} LinkTemplate
+ * @typedef {import("./packages/lit/src/template/node/CommentNodeTemplate.js").default} CommentNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/EventNodeTemplate.js").default} EventNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/KnotNodeTemplate.js").default} KnotNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/NodeTemplate.js").default} NodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/VariableAccessNodeTemplate.js").default} VariableAccessNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/VariableConversionNodeTemplate.js").default} VariableConversionNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/VariableMangementNodeTemplate.js").default} VariableMangementNodeTemplate
+ * @typedef {import("./packages/lit/src/template/node/VariableOperationNodeTemplate.js").default} VariableOperationNodeTemplate
+ * @typedef {import("./packages/lit/src/template/pin/BoolPinTemplate.js").default} BoolPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/DropdownTemplate.js").default} DropdownTemplate
+ * @typedef {import("./packages/lit/src/template/pin/EnumPinTemplate.js").default} EnumPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/ExecPinTemplate.js").default} ExecPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/IInputPinTemplate.js").default} IInputPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/InputTemplate.js").default} InputTemplate
+ * @typedef {import("./packages/lit/src/template/pin/Int64PinTemplate.js").default} Int64PinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/IntPinTemplate.js").default} IntPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/INumericPinTemplate.js").default} INumericPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/KnotPinTemplate.js").default} KnotPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/LinearColorPinTemplate.js").default} LinearColorPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/MinimalPinTemplate.js").default} MinimalPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/NamePinTemplate.js").default} NamePinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/RealPinTemplate.js").default} RealPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/ReferencePinTemplate.js").default} ReferencePinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/RotatorPinTemplate.js").default} RotatorPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/StringPinTemplate.js").default} StringPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/Vector2DPinTemplate.js").default} Vector2DPinTemplate
+ * @typedef {import("./packages/lit/src/template/pin/VectorPinTemplate.js").default} VectorPinTemplate
+ * @typedef {import("./packages/lit/src/template/SelectorTemplate.js").default} SelectorTemplate
+ * @typedef {import("./packages/lit/src/template/window/ColorPickerWindowTemplate.js").default} ColorPickerWindowTemplate
+ * @typedef {import("./packages/lit/src/template/window/WindowTemplate.js").default} WindowTemplate
  * @typedef {import("lit").CSSResult} CSSResult
  * @typedef {import("lit").PropertyValues} PropertyValues
  * @typedef {import("lit").TemplateResult} TemplateResult
- * @typedef {typeof import("./js/entity/ComputedTypeEntity.js").default} ComputedTypeEntityConstructor
+ * @typedef {typeof import("./packages/parser/src/entity/ComputedTypeEntity.js").default} ComputedTypeEntityConstructor
  */
 /**
  * @template T

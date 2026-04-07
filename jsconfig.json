@@ -5,9 +5,8 @@
         "target": "ESNext",
     },
     "include": [
-        "js/**/*.js",
-        "tests/**/*.js",
-        "tests/**/*.spec.js",
+        "packages/**/*.js",
+        "packages/**/*.spec.js",
         "types.js",
     ],
 }

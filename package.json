@@ -1,15 +1,18 @@
 {
-  "name": "ueblueprint",
+  "name": "ueblueprint-workspace",
   "description": "Unreal Engine's Blueprint visualization web library",
   "version": "2.0.0",
+  "private": true,
   "type": "module",
-  "main": "dist/ueblueprint.js",
-  "types": "types.js",
+  "workspaces": [
+    "packages/parser",
+    "packages/lit"
+  ],
   "scripts": {
-    "build": "vite build && vite build --mode minified && sass scss/export.scss:dist/css/ueb-style.css && sass scss/export.scss:dist/css/ueb-style.min.css --style=compressed",
-    "dev": "vite --host 127.0.0.1",
-    "start": "vite --host 127.0.0.1",
-    "test": "vitest run"
+    "build": "npm run build -w @ueblueprint/parser && npm run build -w @ueblueprint/lit",
+    "dev": "npm run dev -w @ueblueprint/lit",
+    "start": "npm run start -w @ueblueprint/lit",
+    "test": "npm run test -w @ueblueprint/parser && npm run test -w @ueblueprint/lit"
   },
   "repository": {
     "type": "git",
@@ -33,9 +36,5 @@
     "terser": "^5",
     "vite": "^7",
     "vitest": "^3"
-  },
-  "dependencies": {
-    "lit": "^3",
-    "parsernostrum": "^1"
   }
 }

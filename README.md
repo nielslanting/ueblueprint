@@ -28,14 +28,14 @@ https://www.npmjs.com/package/ueblueprint
 ```sh
 npm install
 npm run build
-npx http-server
+npm run dev
 ```
 3) Open the link you see in the last message printed.
 
 ### Use in a web page
 
-You can check `index.html` for a working example, the main steps are the following:
-1. Make the `dist` directory available in your website by copying it or installing through npm `npm i ueblueprint`.
+You can check `packages/lit/index.html` for a working example, the main steps are the following:
+1. Make the `packages/lit/dist` directory available in your website by copying it or installing the Lit package.
 2. Include `dist/css/ueb-style.min.css` stylesheet in your page.
 3. Define eventual CSS variables.
 ```HTML
